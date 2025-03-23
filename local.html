@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Manager</title>
+    <link rel="stylesheet" href="pre.html">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function loadStorage() {
+                let storageData = document.getElementById("storageData");
+                storageData.innerHTML = ""; // Clear previous data
+
+                // Get all localStorage keys and display them
+                for (let i = 0; i < localStorage.length; i++) {
+                    let key = localStorage.key(i);
+                    let value = localStorage.getItem(key);
+
+                    let row = `<tr>
+                        <td>${key}</td>
+                        <td>${value}%</td>
+                        <td><button onclick="deleteItem('${key}')">🗑 Delete</button></td>
+                    </tr>`;
+                    storageData.innerHTML += row;
+                }
+            }
+
+            function clearStorage() {
+                if (confirm("Are you sure you want to clear all progress?")) {
+                    localStorage.clear();
+                    loadStorage();
+                }
+            }
+
+            function deleteItem(key) {
+                localStorage.removeItem(key);
+                loadStorage();
+            }
+
+            loadStorage(); // Load storage data on page load
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">🏠 Home</a></li>
+            <li><a href="progress.html">📊 Back to Progress</a></li>
+        </ul>
+    </nav>
+
+    <div class="pre-container">
+        <h2>📦 Local Storage Manager</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="storageData">
+                <!-- Storage items will be loaded here -->
+            </tbody>
+        </table>
+        <br>
+        <button onclick="clearStorage()">🚨 Clear All Progress</button>
+    </div>
+</body>
+</html>

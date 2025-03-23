@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">🏠 Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <h2>Student Profile</h2>
+        <p id="userName">Name: Loading...</p>
+        <p id="userEmail">Email: Loading...</p>
+
+        <div class="progress-section">
+            <h3>Course Progress</h3>
+            <p>Web Development - <span id="webDevPercent">Loading...</span>%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="webDevBar"></div>
+            </div>
+
+            <p>Data Science - <span id="dataSciPercent">Loading...</span>%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="dataSciBar"></div>
+            </div>
+
+            <p>Machine Learning - <span id="mlPercent">Loading...</span>%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mlBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve stored user details
+        const storedName = localStorage.getItem("userName") || "Unknown User";
+        const storedEmail = localStorage.getItem("userEmail") || "Not Available";
+
+        // Display them on the page
+        document.getElementById("userName").textContent = "Name: " + storedName;
+        document.getElementById("userEmail").textContent = "Email: " + storedEmail;
+
+        // Simulated Course Completion Data
+        const courseCompletion = {
+            webDevelopment: localStorage.getItem("webDevProgress") || 80,
+            dataScience: localStorage.getItem("dataSciProgress") || 50,
+            machineLearning: localStorage.getItem("mlProgress") || 60
+        };
+
+        // Update Progress Bars
+        document.getElementById("webDevPercent").textContent = courseCompletion.webDevelopment;
+        document.getElementById("dataSciPercent").textContent = courseCompletion.dataScience;
+        document.getElementById("mlPercent").textContent = courseCompletion.machineLearning;
+
+        document.getElementById("webDevBar").style.width = courseCompletion.webDevelopment + "%";
+        document.getElementById("dataSciBar").style.width = courseCompletion.dataScience + "%";
+        document.getElementById("mlBar").style.width = courseCompletion.machineLearning + "%";
+    </script>
+</body>
+</html>

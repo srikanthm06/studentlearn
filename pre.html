@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre Progress</title>
+    <link rel="stylesheet" href="pre.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function getProgress(key) {
+                return localStorage.getItem(key) || 0; // Get saved progress, default 0%
+            }
+
+            // Calculate average progress for each subject
+            function calculateSubjectProgress(keys) {
+                let total = 0;
+                let count = keys.length;
+
+                keys.forEach(key => {
+                    total += parseFloat(getProgress(key)); // Sum up all progress values
+                });
+
+                return count > 0 ? (total / count).toFixed(2) : 0; // Get average progress
+            }
+
+            // Define video keys for each subject
+            const subjects = {
+                languages: ["nouns-g1", "verbs-to-be", "proper-noun-g2", "common-noun-g2", "subject-of-a-sentence"],
+                maths: ["graph-and-tally-g1", "length-measurement", "probability", "am-and-pm-and-the-24-hours-clock", "input-output-tables"],
+                science: ["seasons", "natural-resources-of-the-earth", "earth-and-its-history", "lemurs-monkeys-and-apes", "rotation-and-revolution"]
+            };
+
+            // Update progress bars
+            document.querySelector(".progress-bar.languages").style.width = calculateSubjectProgress(subjects.languages) + "%";
+            document.querySelector(".progress-bar.languages").textContent = "Pre " + calculateSubjectProgress(subjects.languages) + "%";
+
+            document.querySelector(".progress-bar.maths").style.width = calculateSubjectProgress(subjects.maths) + "%";
+            document.querySelector(".progress-bar.maths").textContent = "Pre " + calculateSubjectProgress(subjects.maths) + "%";
+
+            document.querySelector(".progress-bar.science").style.width = calculateSubjectProgress(subjects.science) + "%";
+            document.querySelector(".progress-bar.science").textContent = "Pre " + calculateSubjectProgress(subjects.science) + "%";
+        });
+    </script>
+    <script src="js/pre.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let storageData = document.getElementById("storageData");
+            storageData.innerHTML = "";
+        
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+        
+                let row = `<tr>
+                    <td>${key}</td>
+                    <td>${value == "Completed" ? "✅ Completed" : value + " sec"}</td>
+                    <td><button onclick="deleteItem('${key}')">🗑 Delete</button></td>
+                </tr>`;
+                storageData.innerHTML += row;
+            }
+        });
+        </script>
+        
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let key = "pre1-progress";
+        let progressStatus = document.getElementById("progressStatus");
+    
+        let storedProgress = localStorage.getItem(key);
+        if (storedProgress === "completed") {
+            progressStatus.textContent = "✅ Completed";
+        } else if (storedProgress) {
+            progressStatus.textContent = "⏳ In Progress";
+        } else {
+            progressStatus.textContent = "❌ Not Started";
+        }
+    });
+    </script>
+    
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">🏠 Home</a></li>
+            <li><a href="progress.html">📊 Back to Progress</a></li>
+        </ul>
+    </nav>
+
+    <div class="pre-container">
+        <h2>📘 Pre Exam Progress</h2>
+
+        <div class="progress-label">Languages</div>
+        <div class="progress">
+            <div class="progress-bar languages">Pre 0%</div>
+        </div>
+
+        <div class="progress-label">Maths</div>
+        <div class="progress">
+            <div class="progress-bar maths">Pre 0%</div>
+        </div>
+
+        <div class="progress-label">Science</div>
+        <div class="progress">
+            <div class="progress-bar science">Pre 0%</div>
+        </div>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pre1 Course</td>
+                <td id="progressStatus">Not Started</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

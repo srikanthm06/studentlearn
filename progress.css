@@ -1,0 +1,123 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #4A90E2, #145DA0);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* Navigation Bar */
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #FFD700;
+}
+
+/* Progress Container */
+.progress-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+}
+
+/* Section Headings */
+.progress-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.progress-container h3 {
+    font-size: 1.4rem;
+    margin-top: 20px;
+    color: #FFD700;
+}
+
+/* Progress Bar Styles */
+.progress {
+    background: rgba(255, 255, 255, 0.3);
+    height: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Academic Progress Colors */
+.pre {
+    background: #1E90FF;
+    width: 70%;
+}
+
+.sslc {
+    background: #FF5733;
+    width: 59%;
+}
+
+.hsc {
+    background: #FFD700;
+    width: 61%;
+}
+
+/* Course Progress Colors */
+.web-dev {
+    background: #4CAF50;
+    width: 80%;
+}
+
+.data-science {
+    background: #FFA500;
+    width: 50%;
+}
+
+.machine-learning {
+    background: #FF4500;
+    width: 65%;
+}
+
+/* Course Labels */
+.progress-label {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}

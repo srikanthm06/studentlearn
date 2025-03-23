@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRE1 Course Videos</title>
+    <link rel="stylesheet" href="pre1.css">
+    <script>
+        function showGrade(grade) {
+            // Hide all grade sections
+            document.querySelectorAll('.grade-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected grade section
+            document.getElementById(grade).style.display = 'block';
+        }
+    </script>
+   
+        
+        <script>
+            // Function to update video progress in localStorage
+            function updateProgress(video) {
+                let key = video.getAttribute("data-key"); // Get unique key from data attribute
+                let progress = (video.currentTime / video.duration) * 100;
+        
+                localStorage.setItem(key, video.currentTime); // Save current time
+            }
+        
+            // Function to restore video progress
+            function restoreProgress(video) {
+                let key = video.getAttribute("data-key"); // Get unique key from data attribute
+                let savedTime = localStorage.getItem(key);
+        
+                if (savedTime) {
+                    video.currentTime = parseFloat(savedTime); // Restore progress
+                }
+            }
+        
+            // Apply progress tracking only to videos inside the "pro" folder
+            document.addEventListener("DOMContentLoaded", function () {
+                let videos = document.querySelectorAll("video");
+        
+                videos.forEach(video => {
+                    let source = video.querySelector("source").src;
+                    
+                    // Check if the video is inside the "pro" folder
+                    if (source.includes("pro/")) {
+                        let fileName = source.split('/').pop(); // Get only the file name
+                        video.setAttribute("data-key", fileName); // Set a unique key
+        
+                        restoreProgress(video); // Restore progress when the page loads
+        
+                        // Update progress on time update
+                        video.addEventListener("timeupdate", function () {
+                            updateProgress(video);
+                        });
+                    }
+                });
+            });
+        </script>
+        
+        <script src="js/pre1.js"></script>
+       
+        <video id="courseVideo" width="640" controls>
+            <source src="path/to/your/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let video = document.getElementById("courseVideo");
+            let videoKey = "pre1_progress"; // Unique key for this video
+        
+            // Check if progress exists in LocalStorage
+            if (localStorage.getItem(videoKey)) {
+                video.currentTime = localStorage.getItem(videoKey);
+            }
+        
+            // Update progress every 5 seconds
+            video.addEventListener("timeupdate", function () {
+                if (!video.paused && !video.ended) {
+                    localStorage.setItem(videoKey, video.currentTime);
+                }
+            });
+        
+            // Mark complete if video ends
+            video.addEventListener("ended", function () {
+                localStorage.setItem(videoKey, "Completed");
+            });
+        });
+        </script>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let video = document.getElementById("myVideo");
+            let key = "pre1-progress";  // Unique key for this video progress
+        
+            // Load progress when page loads
+            if (localStorage.getItem(key)) {
+                video.currentTime = localStorage.getItem(key);
+            }
+        
+            // Save progress when video plays
+            video.addEventListener("timeupdate", function () {
+                localStorage.setItem(key, video.currentTime);
+            });
+        
+            // Mark as completed when video ends
+            video.addEventListener("ended", function () {
+                localStorage.setItem(key, "completed");
+            });
+        });
+        </script>
+        
+        
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="courser.html">⬅ Back to Courses</a></li>
+        </ul>
+    </nav>
+    <button onclick="markAsCompleted('nouns-g1')">Complete</button>
+
+
+
+    <div class="video-container">
+        <h2>PRE1 Course Video List</h2>
+
+        <!-- Grade Selection -->
+        <div class="grade-selection">
+            <button onclick="showGrade('grade1')">First Grade</button>
+            <button onclick="showGrade('grade2')">Second Grade</button>
+            <button onclick="showGrade('grade3')">Third Grade</button>
+            <button onclick="showGrade('grade4')">Fourth Grade</button>
+            <button onclick="showGrade('grade5')">Fifth Grade</button>
+        </div>
+
+        <!-- First Grade Videos -->
+        <div id="grade1" class="grade-section">
+            <h2>📖 First Grade - All Subjects</h2>
+            
+            <h3>Languages</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Nouns</h3>
+                    <video controls>
+                        <source src="pro/nouns-g1.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="video-item">
+                    <h3>Verbs to Be</h3>
+                    <video controls>
+                        <source src="pro/verbs-to-be.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Math</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Graph and Tally</h3>
+                    <video controls>
+                        <source src="pro/graph-and-tally-g1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Science</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Seasons</h3>
+                    <video controls>
+                        <source src="pro/seasons.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Grade Videos -->
+        <div id="grade2" class="grade-section" style="display: none;">
+            <h2>➗ Second Grade - All Subjects</h2>
+            
+            <h3>Languages</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Proper Nouns</h3>
+                    <video controls>
+                        <source src="pre2/proper-noun-g2.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="video-item">
+                    <h3>Common Noun</h3>
+                    <video controls>
+                        <source src="pre2/common-noun-g2.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Math</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Length Measurement</h3>
+                    <video controls>
+                        <source src="pre2/length-measurement.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Science</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Natural Resources</h3>
+                    <video controls>
+                        <source src="pre2/natural-resources-of-the-earth.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Grade Videos -->
+        <div id="grade3" class="grade-section" style="display: none;">
+            <h2>🔬 Third Grade - All Subjects</h2>
+            
+            <h3>Languages</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Subject of a Sentence</h3>
+                    <video controls>
+                        <source src="pre3/subject-of-a-sentence.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Math</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Probability</h3>
+                    <video controls>
+                        <source src="pre3/probability.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Science</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Earth and History</h3>
+                    <video controls>
+                        <source src="pre3/earth-and-its-history.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fourth Grade Videos -->
+        <div id="grade4" class="grade-section" style="display: none;">
+            <h2>📚 Fourth Grade - All Subjects</h2>
+            
+            <h3>Languages</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Synonyms</h3>
+                    <video controls>
+                        <source src="pre4/synonyms.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Math</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>AM and PM</h3>
+                    <video controls>
+                        <source src="pre4/am-and-pm-and-the-24-hours-clock.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Science</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Lemurs Monkeys</h3>
+                    <video controls>
+                        <source src="pre4/lemurs-monkeys-and-apes.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fifth Grade Videos -->
+        <div id="grade5" class="grade-section" style="display: none;">
+            <h2>🎓 Fifth Grade - All Subjects</h2>
+            
+            <h3>Languages</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Types of Sentences</h3>
+                    <video controls>
+                        <source src="pre5/types-of-sentences.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Math</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Input and Output</h3>
+                    <video controls>
+                        <source src="pre5/input-output-tables.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Science</h3>
+            <div class="video-list">
+                <div class="video-item">
+                    <h3>Rotation and Revolution</h3>
+                    <video controls>
+                        <source src="pre5/rotation-and-revolution.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <video controls onended="markAsCompleted('nouns-g1')">
+        <source src="pro/nouns-g1.mp4" type="video/mp4">
+    </video>
+    <video id="myVideo" width="600" controls>
+        <source src="your-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</body>
+</html>
